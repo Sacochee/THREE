@@ -1,95 +1,115 @@
 import Image from 'next/image'
 import styles from './page.module.css'
+import Game from '@/componets/game/game'
 
 export default function Home() {
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+   <main>
+    <Game />
+   </main>
   )
 }
+
+/**
+ * 
+ * 
+ * 
+ * 
+ * let camera: any, scene: THREE.Scene, raycaster: any, renderer: any;
+
+
+
+const pointer = new THREE.Vector2();
+
+init();
+animate();
+
+function init() {
+  camera = new THREE.PerspectiveCamera(
+    70,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    100
+  );
+
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xf0f0f0);
+  camera.position.z = 5;
+
+ 
+
+  const geometry = new THREE.BoxGeometry();
+
+  const object = new THREE.Mesh(
+    geometry,
+    new THREE.MeshBasicMaterial({color : 0xfffff})
+  );
+
+  object.position.x = 1;
+  object.position.y = 1;
+  object.position.z = 1;
+
+  
+
+  scene.add(object);
+
+  const obj = new THREE.Mesh(
+    geometry,
+    new THREE.MeshBasicMaterial({color : 0xfffff})
+  );
+
+  obj.position.x = 1;
+  obj.position.y = 1;
+  obj.position.z = 2;
+
+  
+
+  scene.add(obj);
+
+
+  raycaster = new THREE.Raycaster();
+
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  document.body.appendChild(renderer.domElement);
+
+  document.addEventListener("mousemove", onPointerMove);
+
+  //
+
+  
+}
+
+
+function onPointerMove(event: MouseEvent) {
+  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+  pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+}
+
+//
+
+function animate() {
+  requestAnimationFrame(animate);
+
+  render();
+}
+
+function render() {
+
+
+  // find intersections
+
+  raycaster.setFromCamera(pointer, camera);
+
+  const intersects = raycaster.intersectObjects(scene.children, false);
+  
+  if (intersects.length > 0) {
+	console.log(intersects);
+    
+  }
+
+  renderer.render(scene, camera);
+}
+
+ */
