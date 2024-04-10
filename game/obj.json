@@ -1,0 +1,31 @@
+[
+  {
+    "id": 0,
+    "cote": { "left": null, "rigth": 7, "top": 1, "bottom": null },
+    "possition": { "x": 0, "y": 0 },
+    "path": "centre.glb",
+    "angle": 1
+  },
+  {
+    "id": 1,
+    "cote": { "left": null, "rigth": 8, "top": 2, "bottom": 0 },
+    "possition": { "x": 2, "y": 2 },
+    "path": "centre.glb",
+    "angle": 3
+  },
+  {
+    "id": 2,
+    "cote": { "left": null, "rigth": 9, "top": 3, "bottom": 1 },
+    "possition": { "x": 4, "y": 4 },
+    "path": "centre.glb",
+    "angle": 1
+  },
+  {
+    "id": 3,
+    "cote": { "left": null, "rigth": 10, "top": 4, "bottom": 2 },
+    "possition": { "x": 6, "y": 6 },
+    "path": "centre.glb",
+    "angle": 1
+  }
+
+]
