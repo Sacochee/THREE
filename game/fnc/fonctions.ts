@@ -1,84 +1,73 @@
 import { MeshPiece } from "../class/MeshPiece";
 import { cardinal, coordonee } from "../types/basic";
-import { scene } from "../main";
-import { Box2, Box3, Mesh, Scene } from "three";
-import Area from "../class/Area";
-import { cpSync } from "fs";
+import { Box3, Box3Helper, Scene } from "three";
+import { scene, targetPiece } from "../main";
+import { Group } from "three/examples/jsm/libs/tween.module.js";
 
+const v = 1;
 
-export function verifieHit(scene : Scene){
-  const piece : MeshPiece[] = []
-  const box : Area[] = []
+/**
+ * gp check if c est pas deja assembler
+ *
+ */
 
-  scene.children.forEach(item =>{
-    if(item instanceof MeshPiece){
-      piece.push(item)
-    }else if(item instanceof Area){
-      box.push(item)
+export function verifieHit(scene: Scene) {
+  (targetPiece.getTarget() as MeshPiece).changeTargeted(
+    true,
+    crypto.randomUUID()
+  );
+  const targets: MeshPiece[] = [];
+  const lst: MeshPiece[] = [];
+
+  
+  scene.children.forEach((child) => {
+    if (child instanceof MeshPiece) {
+      if (child.getTargeted()) {
+        targets.push(child);
+      } else if (child.getPlaced() && !targets.includes(child)) {
+        lst.push(child);
+      }
     }
+  });
+  console.log(targets, lst)
+  for (let i = 0; i < lst.length; i++) {
+    console.log("time");
+    if (isClose(lst[i], targets[0])) {
+      if (getTargets(targets).includes(lst[i].getIndex())) {
+        for(const target of targets){
+          if (!target.getGrp().includes(lst[i])) {
+            lst[i].push(target);
+            target.push(lst[i]);
+            target.move(lst[i].position, crypto.randomUUID());
+          }
+        }
+      } else if (i == lst.length) {
+        targets[0].back();
+        break;
+      }
+    }
+  }
+  targets[0].changeTargeted(false, crypto.randomUUID())
+  targetPiece.setTarget();
+}
+
+function isClose(obj: MeshPiece, target: MeshPiece) {
+  return (
+    obj.position.x - v < target.position.x &&
+    obj.position.x + v > target.position.x &&
+    obj.position.y - v < target.position.y &&
+    obj.position.y + v > target.position.y
+  );
+}
+
+function getTargets(targets: MeshPiece[]) : number[] {
+  const lst : number[] = []
+
+  targets.forEach(item =>{
+    item.getNextTo().forEach(nb =>{
+      if(!lst.includes(nb)) lst.push(nb)
+    })
   })
 
-  for(const p of piece){
-    for(const b of box){
-      const piece = new Box3().setFromObject(p)
-      const area = new Box3().setFromObject(b)
-
-      console.log()
-      if(piece.intersectsBox(area) && b.getParent().getIndex() != p.getIndex()){
-        if(b.getIndex() == p.getIndex()){
-          b.getParent().set(b.getCard(), p)
-        }
-      }
-    }
-  }
+  return lst
 }
-
-// coller les pièce
-
-// re faire plug
-export function plug(
-  target: MeshPiece | Area,
-  base: MeshPiece,
-  type: cardinal
-) {
-  switch (type) {
-    case "left":
-      target.position.set(base.position.x - 1, base.position.y, 0);
-      break;
-    case "right":
-      target.position.set(base.position.x + 1, base.position.y, 0);
-      break;
-    case "top":
-      target.position.set(base.position.x, base.position.y + 1, 0);
-      break;
-    case "bottom":
-      target.position.set(base.position.x, base.position.y - 1, 0);
-      break;
-  }
-}
-
-export function getPlug(
-  base: MeshPiece,
-  type: cardinal
-) {
-  switch (type) {
-    case "left":
-      return{x : base.position.x - 1,y:  base.position.y}
-    case "right":
-      return {
-        x: base.position.x + 1,
-        y : base.position.y
-      }
-    case "top":
-      return {
-        x : base.position.x,
-        y: base.position.y + 1
-      }
-    case "bottom":
-      return {
-        x : base.position.x,
-        y : base.position.y - 1
-      }
-  }
-}
-

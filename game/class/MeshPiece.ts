@@ -1,158 +1,110 @@
 import * as THREE from "three";
-import {  scene } from "../main";
-import { cardinal, coordonee, directionNull } from "../types/basic";
-import Area from "./Area";
-import { getPlug } from "../fnc/fonctions";
+import { coordonee} from "../types/basic";
 
-/*
-left 
-right 
-top bootom
 
-sois MEsh area sois objpiecèe
-*/
-
-export class MeshPiece extends THREE.Mesh {
+export class MeshPiece extends THREE.Group  {
   private IsPlaced = false;
   private index;
   private oldPossition: coordonee;
-  private drag :any ;
-  private idMove : string
+  private readonly nextTo : number[]
+  private grp : MeshPiece[] = []
 
-  private left: null | Area | MeshPiece = null;
-  private right: null | Area | MeshPiece = null;
-  private top: null | Area | MeshPiece = null;
-  private bottom: null | Area | MeshPiece = null;
+  private lastMvt : string = crypto.randomUUID()
 
-  constructor(obj: THREE.Mesh, p: directionNull, id: number, poss: coordonee) {
-    super(
-      obj.geometry,
-      new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff })
-    );
-    this.position.setX(poss.x);
-    this.position.setY(poss.y);
-    this.oldPossition = { x: this.position.x, y: this.position.y };
+  private targeted : boolean = false
+  private targetUpdate : string = crypto.randomUUID()
+
+  constructor(lst: number[], id: number) {
+    super();
+
+    this.oldPossition = { x: 0, y: 0 };
     this.index = id;
-    this.addHitBox(p);
-    this.idMove = crypto.randomUUID()
+    this.nextTo = lst
   }
 
-  //mvt methode
+  getTargeted(){
+    return this.targeted
+  }
 
-  savePossition(){
+  changeTargeted(bool : boolean, id : string){
+    if(this.targetUpdate != id){
+      this.targetUpdate = id
+      this.targeted = bool
+      this.grp.forEach(item =>{
+        item.changeTargeted(bool, id)
+      })
+    }
+    
+
+  }
+
+  move(vect : THREE.Vector3, idMvt : string){
+    if(idMvt != this.lastMvt){
+      this.position.setX(vect.x)
+      this.position.setY(vect.y)
+      this.lastMvt = idMvt
+      this.grp.forEach(m =>m.move(vect, idMvt))
+    }
+  }
+
+  savePossition() {
     this.oldPossition = {
-      x : this.position.x,
-      y : this.position.y
-    }
+      x: this.position.x,
+      y: this.position.y,
+    };
   }
 
-  move(c: coordonee, id: string) {
-    if (this.idMove != id) {
-      this.idMove = id
-      this.position.set(c.x, c.y, 0);
-      this.dragginGroupe();
-    }
+  setPosition(obj : MeshPiece ) {
+    this.position.setX(
+      obj.position.x
+    )
+    this.position.setY(
+      obj.position.y
+    )
   }
 
-  dragginGroupe(id?: string) {
-    if(id) this.idMove = id
-    this.left?.move(getPlug(this, "left"), this.idMove);
-    this.right?.move(getPlug(this, "right"), this.idMove);
-    this.top?.move(getPlug(this, "top"), this.idMove);
-    this.bottom?.move(getPlug(this, "bottom"), this.idMove);
-    // move the grp
+  getPlaced(){
+    return this.IsPlaced
+  }
+
+  setPlaced(){
+    this.IsPlaced = true
   }
 
   back() {
+    console.log("back")
     // this.position.setX(this.oldPossition.x);
     // this.position.setY(this.oldPossition.y);
   }
 
-  // pièce methode
   getIndex() {
     return this.index;
   }
 
-  set(a: cardinal, obj: MeshPiece) {
-    switch (a) {
-      case "left":
-        scene.remove(this.left as Area)
-        this.left = obj;
-        return;
-      case "right":
-        scene.remove(this.right as Area)
-        this.right = obj;
-        return;
-      case "bottom":
-        scene.remove(this.bottom as Area)
-        this.bottom = obj;
-        return;
-      case "top":
-        scene.remove(this.top as Area)
-        this.top = obj;
-        return;
+  getNextTo(){
+    return this.nextTo;
+  }
+
+  haveNextTo(index : number | number[]){
+    if(typeof index == "number"){
+      return this.nextTo.indexOf(index) != -1
+    }
+    else {
+      for(const item of index){
+        if(this.nextTo.indexOf(item) != -1){
+          return true
+        }
+      }
+      return false
     }
   }
 
-  canSet(a: cardinal, obj: MeshPiece) {
-    switch (a) {
-      case "left":
-        if (this.left instanceof Area)
-          if (this.left.getIndex() === obj.getIndex()) {
-            this.set("left", obj)
-            obj.set("left", this);
-            obj.move(getPlug(this, "left"), this.idMove)
-            // plug in physique
-            return;
-          }
-        obj.back();
-        return;
-      case "right":
-        if (this.right instanceof Area)
-          if (this.right.getIndex() === obj.getIndex()) {
-            this.set("right", obj)
-            obj.set("right", this);
-            obj.move(getPlug(this, "right"), this.idMove)
-            // plug in physique
-            return;
-          }
-        obj.back();
-        return;
-      case "bottom":
-        if (this.bottom instanceof Area)
-          if (this.bottom.getIndex() === obj.getIndex()) {
-            this.set("bottom", obj)
-            obj.set("bottom", this);
-            obj.move(getPlug(this, "bottom"), this.idMove)
-            // plug in physique
-            return;
-          }
-        obj.back();
-        return;
-      case "top":
-        if (this.top instanceof Area)
-          if (this.top.getIndex() === obj.getIndex()) {
-            this.set("top", obj)
-            obj.set("top", this);
-            obj.move(getPlug(this, "top"), this.idMove)
-            // plug in physique
-            return;
-          }
-        obj.back();
-        return;
-    }
+  getGrp(){
+    return this.grp
   }
 
-  private addHitBox(p: directionNull) {
-    this.left = p.left != null ? new Area(p.left, this, "left") : null;
-    this.right = p.rigth != null ? new Area(p.rigth, this, "right") : null;
-    this.top = p.top != null ? new Area(p.top, this, "top") : null;
-    this.bottom = p.bottom != null ? new Area(p.bottom, this, "bottom") : null;
+  push(obj : MeshPiece){
+    this.grp.push(obj)
   }
-
-  
-
-  enableDrag(bool : boolean){
-    this.drag.enabled = bool 
-  }
+ 
 }

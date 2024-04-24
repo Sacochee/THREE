@@ -2,63 +2,61 @@ import * as THREE from "three";
 import { MeshPiece } from "../class/MeshPiece";
 import { GLTF, GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { scene } from "../main";
-import * as BufferGeometryUtils from "three/addons/utils/BufferGeometryUtils.js";
-import { storage } from "../types/class";
+import Part from "../class/Part";
+import json from "../obj.json";
+import place from "../fnc/place";
+import { setDrag } from "./InitPièces";
+import { getRandomValues } from "./place";
 
-export default async function Bluid(obj: storage, cb: Function) {
+
+export default function Bluid() {
+  const liste: MeshPiece[] = [];
   const loader = new GLTFLoader();
   loader.load(
-    obj.path,
+    "oui.glb",
     (data: GLTF) => {
-      if (
-        data.scene.children[0].children[1] instanceof THREE.Mesh &&
-        data.scene.children[0].children[0] instanceof THREE.Mesh
-      ) {
-        const geo = BufferGeometryUtils.mergeGeometries([
-          data.scene.children[0].children[1].geometry,
-          data.scene.children[0].children[0].geometry,
-        ]);
+      data.scene.children.forEach((item) => {
+        if (item.children.length > 0) {
+          let obj = null;
+          for (const j of json) {
+            if (j.id.toString() == item.name) {
+              obj = j;
+              break;
+            }
+          }
 
-        const texture = new THREE.TextureLoader().load(
-          "ovh.png",
-          (t) => {
-            console.log(t)
-            const m = new THREE.Mesh(
-              geo,
-              new THREE.MeshBasicMaterial({ map: t })
-            );
-            const mesh = new MeshPiece(m, obj.cote, obj.id, obj.possition);
-            mesh.scale.x = 0.5;
-            mesh.scale.y = 0.05;
-            mesh.scale.z = 0.5;
+          if (obj == null) return;
+        
+          
 
-            mesh.position.z = 0;
+          const mesh = new MeshPiece(obj.cote, obj.id);
+          const lst: THREE.Mesh[] = [];
+          item.children.forEach((i) => {
+            if (i instanceof THREE.Mesh) {
+              const build = new Part(i);
+              lst.push(build);
+              mesh.add(build);
+            }
+          });
 
-            mesh.rotateX(-Math.PI / 2);
-            // mesh.rotateZ(Math.PI / 2);
-            mesh.rotateY(getRad(obj.angle));
+          const box = new THREE.Box3().setFromObject(mesh);
+          // console.log(box.getSize(new THREE.Vector3()));
 
-            scene.add(mesh);
-            cb(mesh);
-          },
-          undefined,
-          (err) => console.error(err)
-        );
-      }
+          mesh.rotateZ((4 * Math.PI) / 2);
+          mesh.rotateX(Math.PI / 2);
+          scene.add(mesh);
+
+          obj.dev
+            ? mesh.position.set(
+              0,0,0
+            )
+            : place(mesh)
+          liste.push(mesh);
+        }
+      });
+      setDrag(liste);
     },
     undefined,
     (err) => console.error(err)
   );
-}
-function getRad(x: number) {
-  switch (x) {
-    case 1:
-      return Math.PI / 2;
-    case 2:
-      return -Math.PI / 2;
-    case 3:
-      return -Math.PI;
-    default:
-      return 0;
-  }
 }
