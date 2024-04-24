@@ -12,7 +12,7 @@ export default function control() {
     RIGHT: THREE.MOUSE.PAN,
   };
   orb.touches = {
-    ONE: THREE.TOUCH.DOLLY_PAN,
+    ONE: THREE.TOUCH.PAN,
     TWO: THREE.TOUCH.DOLLY_PAN,
   };
 
