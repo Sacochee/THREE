@@ -7,14 +7,16 @@ import json from "../obj.json";
 import place from "../fnc/place";
 import { setDrag } from "./InitPièces";
 import { getRandomValues } from "./place";
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
 
 export default function Bluid() {
   const liste: MeshPiece[] = [];
   const loader = new GLTFLoader();
   loader.load(
-    "oui.glb",
+    "A.glb",
     (data: GLTF) => {
+      console.log(data)
       data.scene.children.forEach((item) => {
         if (item.children.length > 0) {
           let obj = null;
@@ -33,7 +35,7 @@ export default function Bluid() {
           const lst: THREE.Mesh[] = [];
           item.children.forEach((i) => {
             if (i instanceof THREE.Mesh) {
-              const build = new Part(i);
+              const build = new Part(i)
               lst.push(build);
               mesh.add(build);
             }
@@ -42,15 +44,10 @@ export default function Bluid() {
           const box = new THREE.Box3().setFromObject(mesh);
           // console.log(box.getSize(new THREE.Vector3()));
 
-          mesh.rotateZ((4 * Math.PI) / 2);
+      
           mesh.rotateX(Math.PI / 2);
+          place(mesh)
           scene.add(mesh);
-
-          obj.dev
-            ? mesh.position.set(
-              0,0,0
-            )
-            : place(mesh)
           liste.push(mesh);
         }
       });

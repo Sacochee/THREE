@@ -1,13 +1,24 @@
-import Image from 'next/image'
-import styles from './page.module.css'
-import Game from '@/componets/game/game'
+import Image from "next/image";
+import styles from "./page.module.css";
+import Game from "@/componets/game/game";
+import Link from "next/link";
 
 export default function Home() {
   return (
-   <main>
-    <Game />
-   </main>
-  )
+    <main>
+      <h1>Page d accueil</h1>
+      <p>ce ci est un texte explicatif</p>
+      <div>
+        <button>Facile</button>
+        <button>Moyen</button>
+        <button>Dificile</button>
+        <button>Perosnalisé</button>
+        
+      </div>
+      <Link href={"/game"}>
+      <button>Jouer</button></Link>
+    </main>
+  );
 }
 
 /**

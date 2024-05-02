@@ -1,0 +1,29 @@
+.div{
+    width: 100vw;
+    height: 5%;
+    position: absolute;
+    bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn{
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    content:  "Je réponds a la questions";
+    border: none;
+    border-radius: 15px;
+    background-color: #3D41A6;
+    padding: 10px 30px;
+    color: white;
+    cursor: pointer;
+    text-rendering: auto;
+}
+
+@media (hover : hover) {
+    .btn:hover{
+        background-color: white;
+        color: red;
+    }
+}
