@@ -44,7 +44,7 @@ const vue = Camera()
 const {camera} = vue
 const {orb} = vue
 
-const adv = new Advancement(150)
+const adv = new Advancement(40)
 // const stats = new Stats();
 const Mouse = new Souris(camera, orb)
 const targetPiece = new TargetPiece();

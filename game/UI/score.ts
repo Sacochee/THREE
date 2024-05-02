@@ -7,7 +7,7 @@ export default function(nb : number){
     div.className = style.score
     const span = document.createElement("span")
 
-    span.textContent = "Help restant : " + nb
+    span.textContent = "Help : " + nb
 
     div.appendChild(span)
     document.getElementById("root")?.appendChild(div)
