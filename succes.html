@@ -1,0 +1,259 @@
+<section>
+  <ul class="flechUl">
+    <meta charset="UTF-8" />
+
+    <li id="Débutante">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Débutante</h3>
+        <p>Finir le puzzle en mode facile</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="Expérimentée">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Expérimentée</h3>
+        <p>Finir le puzzle en mode moyen</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="Une routine">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Une routine</h3>
+        <p>Finir le puzzle en mode difficile</p>
+      </div>
+      <div class="type"></div>
+    </li>
+   
+    <li id="Escargot">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Escargot</h3>
+        <p>Terminer le puzzle en 30 minutes ou moins</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="Dans les clous">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Dans les clous</h3>
+        <p>Terminer le puzzle en 20 minutes ou moins</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="Persistante">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Persistante</h3>
+        <p>Finir le puzzle dans tous les modes de jeux (facile, moyen,
+          difficile).</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="Efficace">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Efficace</h3>
+        <p>Terminer le puzzle en 10 minutes ou moins</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="Juste a temps">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Juste a temps</h3>
+        <p>Finir le puzzle 1s avant la fin du temps imparti</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="La fin etait proche...">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>La fin etait proche...</h3>
+        <p>Finir le puzzle 30s avant la fin du temps imparti</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="à la dernière !">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>À la dernière !</h3>
+        <p>Finir le puzzle 60s avant la fin du temps imparti</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="Exacte !">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Exacte !</h3>
+        <p>Finir le puzzle sans perdre de vie</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="Intermédiaire">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Intermédiaire</h3>
+        <p>Terminer le puzzle tout en ayant perdu 2 vies</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="Désorganisée">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Désorganisée</h3>
+        <p>Terminer le puzzle tout en ayant perdu 5 vies</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="Organisée">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Organisée</h3>
+        <p>Terminer les quatre parties séparément</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="Flemarde">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Flemarde</h3>
+        <p>Utiliser tous les coups d'aide disponibles (en facile ou moyen)</p>
+      </div>
+      <div class="type"></div>
+    </li>
+    <li id="Talentueuse">
+      <div class="c">
+        <span></span>
+        <span></span>
+      </div>
+      <div>
+        <h3>Talentueuse</h3>
+        <p>Utiliser aucun coups d'aide disponibles (en facile ou en moyen)</p>
+      </div>
+      <div class="type"></div>
+    </li>
+  </ul>
+
+  <style>
+    .ok {
+      --bg: #008a2f;
+    }
+    .no {
+      --bg: #0a0a0a;
+    }
+
+    .flechUl li {
+      position: relative;
+      width: 250px;
+      background-color: var(--bg);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      height: 80px;
+      gap: 15px;
+      color: white;
+      margin: 10px 0;
+    }
+
+    .type {
+      position: absolute;
+      top: 5px;
+      right: 20px;
+    }
+    .flechUl li h3 {
+      margin: 0;
+    }
+
+    .flechUl p{
+      max-width: 300px;
+    }
+
+    .flechUl li p {
+      margin: 0;
+    }
+    .c {
+      position: relative;
+      width: 35px !important;
+      height: 35px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .c span {
+      position: relative;
+      width: 15px !important;
+      height: 2px !important;
+      background-color: #fff;
+    }
+
+    .c span:first-child {
+      top: 3.5px;
+      left: 3px;
+      width: 10px !important;
+      height: 2px !important;
+      transform: rotate(45deg);
+    }
+
+    .c span:last-child {
+      right: 3px;
+      width: 20px !important;
+      height: 2px !important;
+      transform: rotate(-45deg);
+    }
+
+    @media (min-width: 400px) {
+      .flechUl li {
+        width: 350px;
+      }
+    }
+  </style>
+</section>

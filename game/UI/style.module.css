@@ -1,29 +1,158 @@
-.div{
-    width: 100vw;
-    height: 5%;
-    position: absolute;
-    bottom: 15px;
+.main{
     display: flex;
-    justify-content: center;
+    flex-direction: column-reverse;
+    align-items: center;
+
+    background: var(--blue);
+    position: absolute;
+    top: 0;
+    width: 100%;
 }
 
+.btn, .score{
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 30px;
+}
 .btn{
-    position: relative;
+    top: 60px;
+}
+.score{
+    top: 120px;
+}
+
+.score li{
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+    width: 45px;
+    text-wrap: nowrap;
+}
+
+.score li:last-child{
+    flex-direction: row;
+    align-items: center;
+}
+.txt{
+    font-size: 10px;
+}
+
+.info{
+    font-size: 24px;
+}
+
+.btn button, .params button{
+    background: none;
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    margin: 0 20px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    content:  "Je réponds a la questions";
-    border: none;
-    border-radius: 15px;
-    background-color: #3D41A6;
-    padding: 10px 30px;
-    color: white;
-    cursor: pointer;
-    text-rendering: auto;
 }
 
+.btn button:active, .params button:active{
+    background-color: #5a5ff0;
+}
+.b{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+
+.notif{
+    position: absolute;
+    width: 100vw;
+    top: 160px;
+   
+}
+.box{
+    position: absolute;
+    right: 0;
+    width: 300px;
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+}
+
+.params{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--blue);
+}
+
+
 @media (hover : hover) {
-    .btn:hover{
-        background-color: white;
-        color: red;
+    .btn button:hover, .params button:hover{
+        background-color: #5a5ff0;
+        cursor: pointer;
     }
+}
+
+/* @media (min-width : 350px ) {
+    .score li:first-child{
+        padding-left: 20px;
+    }
+}
+
+@media (min-width : 450px ) {
+    .score li:first-child{
+        padding-left: 0;
+    }
+} */
+
+@media (min-width : 850px) {
+    .main{
+        background-color: var(--blue);
+        display: grid;
+        grid-template-columns:  repeat(auto-fit, minmax(100px, 1fr)) ;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn, .score, .params{
+        width: 100%;
+        
+    }
+    .score li{
+        margin: 0;
+    }
+    .btn{
+        top: 0;
+        justify-content: center;
+        background-color: transparent;
+        grid-column: 3;
+        grid-row: 1;
+    }
+    /* .b{
+        width: 33vw;
+    } */
+    .score{
+        left: 0;
+        top: 0;
+        padding: 0;
+        background-color: transparent;
+        grid-column: 1;
+        grid-row: 1;
+        padding-left: 30px;
+    }
+    .score li{
+        padding-left: 0;
+        width: 150px;
+    }
+    .params{
+        grid-column: 5;
+        justify-content: flex-end;
+        padding-right: 30px;
+    }
+
 }

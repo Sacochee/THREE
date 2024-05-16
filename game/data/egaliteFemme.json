@@ -1,0 +1,32 @@
+[
+  {
+    "q": "Depuis quelle année le principe d'égalité est-il inscrit dans la Constitution Française ?",
+    "t": "1946",
+    "f": ["1848", "1875"],
+    "a": "D"
+  },
+  {
+    "q": "Quelle femme a rédigé la Déclaration des droits de la femme et de la citoyenne ?",
+    "t": "Olympe de Gouges",
+    "f": ["Aya Nakamura", "George Sand"],
+    "a": "D"
+  },
+  {
+    "q": "Le Code civil consacre-t-il l’égalité des femmes et des hommes ?",
+    "t": "Non",
+    "f": ["Oui"],
+    "a": "D"
+  },
+  {
+    "q": "Quel est le taux de féminisation aujourd’hui dans les écoles d&#39;ingénieurs en France ?",
+    "t": "29 %",
+    "f": ["46 %", "69 %"],
+    "a": "D"
+  },
+  {
+    "q": "L'égalité des droits suffit-elle à garantir une égalité réelle entre les femmes et les hommes ?",
+    "t": "Non",
+    "f": ["Oui"],
+    "a": "D"
+  }
+]

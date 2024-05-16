@@ -1,0 +1,41 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+ z-index: 10;
+}
+
+.main button:last-child{
+    margin-top: 100px;
+}
+
+.main ul {
+  padding: 0;
+  list-style: none;
+}
+
+.s{
+    border: none;
+    background: none;
+
+    text-decoration: underline;
+    cursor: pointer;
+}
+.s:hover{
+    color: var(--blue);
+}
+.btn {
+  border: 1px solid var(--blue);
+  border-radius: 15px;
+  background-color: var(--blue);
+  color: white;
+
+  padding: 10px 30px;
+  cursor: pointer;
+}
+
+.btn:hover{
+    background-color: white;
+    color: var(--blue);
+}

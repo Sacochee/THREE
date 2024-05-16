@@ -1,0 +1,14 @@
+[
+  {
+    "q": "QUelle est la réponse A ?",
+    "t": "La réponse A",
+    "f": ["A", "La vrai réponse A"],
+    "a": "B"
+  },
+  {
+    "q": "QUelle est la réponse A ?",
+    "t": "La réponse A",
+    "f": ["A", "La vrai réponse A"],
+    "a": "C"
+  }
+]

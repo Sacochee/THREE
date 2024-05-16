@@ -6,17 +6,15 @@ import Part from "../class/Part";
 import json from "../obj.json";
 import place from "../fnc/place";
 import { setDrag } from "./InitPièces";
-import { getRandomValues } from "./place";
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 
 
 export default function Bluid() {
   const liste: MeshPiece[] = [];
   const loader = new GLTFLoader();
   loader.load(
-    "A.glb",
+    "C.glb",
     (data: GLTF) => {
-      console.log(data)
+      
       data.scene.children.forEach((item) => {
         if (item.children.length > 0) {
           let obj = null;
@@ -46,6 +44,7 @@ export default function Bluid() {
 
       
           mesh.rotateX(Math.PI / 2);
+      
           place(mesh)
           scene.add(mesh);
           liste.push(mesh);

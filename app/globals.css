@@ -1,4 +1,15 @@
 
+html{
+    --blue : #3D41A6;
+    --red : #FA5B5B;
+    --yellow : #EEAF0F;
+    --green : #008A2F;
+    overflow-y: scroll!important;
+    
+}
+
 body{
+   overflow-x: hidden;
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }

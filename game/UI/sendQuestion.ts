@@ -1,82 +1,104 @@
 import { abcd } from "../types";
-import style from "./style.module.css"
-import ToggleReverse from "./ToggleReverse";
+import style from "./stylee.module.css";
 import { reverseCam } from "../camera/camera";
-import QuestionA from "./Question/QuestionA";
-import QuestionB from "./Question/QuestionB";
-import QuestionC from "./Question/QuestionC";
-import QuestionD from "./Question/QuestionD";
 import { adv, scene } from "../main";
 import { MeshPiece } from "../class/MeshPiece";
-import place from "../fnc/place";
+import place, { getRandomValues } from "../fnc/place";
+import score from "./score";
+import Attention from "./alerts/attention/Attention";
+import GameOver from "../fnc/GameOver";
+import GameWin from "../fnc/GameWin";
+import QuestionLoading, { dataQuestion } from "./Question/QuestionLoading";
+import boulo from "../data/egaliteBolo.json";
+import egale from "../data/egaliteFemme.json";
+import data from "../data/A.json";
 
 
-const doc = document.getElementById("root");
 
-export default function(grp : abcd){
-   
-    const popup = document.createElement("div")
-    popup.style.width = "100vw"
-    popup.style.height = "100vh"
-    popup.style.position = "fixed"
-    popup.style.backgroundColor = "red"
-    popup.id = "A"
-    const title = document.createElement("h1")
-    title.textContent = "Question"
-    
-    popup.appendChild(title)
+export default function AddQuestion(type: abcd) {
+  const doc = document.getElementById("root");
+  const div = document.createElement("div");
+  div.className = style.div;
+  div.id = "q";
+  const btn = document.createElement("button");
+  btn.textContent = "Je réponds à la question !";
+  btn.addEventListener("click", function () {
+    getQuestion(type);
+  });
 
+  btn.className = style.btn;
 
-    AddQuestion(grp)
+  div.appendChild(btn);
+  doc?.appendChild(div);
 }
 
-export function AddQuestion(type : abcd){
-    const div = document.createElement("div")
-    div.className = style.div
-    div.id = "q"
-    const btn = document.createElement("button")
-    btn.addEventListener('click', function(){
-        this.parentElement?.remove()
-        reverseCam()
-        ToggleReverse()
-        doc?.appendChild(getQuestion(type)())
-    })
-
-    btn.className  = style.btn
-
-    div.appendChild(btn)
-    if(!document.getElementById("q")) 
-        doc?.appendChild(div)
-
-
+function getQuestion(a: abcd) {
+  switch (a) {
+    case "A":
+      return QuestionLoading(getRandomMenber(boulo));
+    case "B":
+      return QuestionLoading(data[0] as dataQuestion);
+    case "C":
+      return QuestionLoading(data[1] as dataQuestion);
+    case "D":
+      return QuestionLoading(getRandomMenber(egale));
+  }
 }
 
-function getQuestion(a : abcd){
-    switch(a){
-        case "A":
-            return QuestionA
-        case "B":
-            return QuestionB
-        case "C":
-            return QuestionC
-        case "D":
-            return QuestionD
+export function Err(a: abcd) {
+  if (adv.getHeart() == 0) {
+    adv.getCloseTo()
+      ? GameOver()
+      : Attention("Ceci est votre dernière chance !");
+    shuffle();
+    document.getElementById("question")?.remove();
+    document.getElementById("q")?.remove();
+    reverseCam();
+    adv.setCloseTo();
+  } else {
+    adv.rmHeart();
+    score(true);
+    document.getElementById("question")?.remove();
+    Attention("Je vennez de perdre une vie !");
+  }
+}
+
+export function success(a: abcd) {
+  switch (a) {
+    case "A":
+      adv.setGrpA();
+      break;
+    case "B":
+      adv.setGrpB();
+      break;
+    case "C":
+      adv.setGrpC();
+      break;
+    case "D":
+      adv.setGrpD();
+      break;
+  }
+
+  document.getElementById("question")?.remove();
+  document.getElementById("q")?.remove();
+  reverseCam();
+  GameWin();
+}
+
+function shuffle() {
+  scene.children.forEach((item) => {
+    if (item instanceof MeshPiece) {
+      place(item);
+      item.clearGrp();
     }
+  });
+
+  adv.getGrpA() && adv.setGrpA();
+  adv.getGrpB() && adv.setGrpB();
+  adv.getGrpC() && adv.setGrpC();
+  adv.getGrpD() && adv.setGrpD();
 }
 
-export function Err(){
-
-    document.getElementById("question")?.remove()
-
-    scene.children.forEach(item =>{
-        if(item instanceof MeshPiece){
-            place(item)
-            item.clearGrp()
-        }
-    })
-
-    adv.getGrpA() && adv.setGrpA()
-    adv.getGrpB() && adv.setGrpB()
-    adv.getGrpC() && adv.setGrpC()
-    adv.getGrpD() && adv.setGrpD()
+function getRandomMenber(lst: any[]) {
+  return lst[Math.floor(getRandomValues(0, lst.length-1))];
 }

@@ -1,126 +1,213 @@
-import Image from "next/image";
-import styles from "./page.module.css";
-import Game from "@/componets/game/game";
+"use client";
 import Link from "next/link";
+import style from "./page.module.css";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Volume } from "three/examples/jsm/Addons.js";
+import Intro from "@/componets/main/intro";
+import { div } from "three/examples/jsm/nodes/Nodes.js";
+import { useSearchParams } from "next/navigation";
+type diff = "facile" | "moyen" | "difficile";
+type data = {
+  coup: string;
+  time: string;
+  vie: string;
+  pre: string;
+};
 
 export default function Home() {
+  const [diff, setDiff] = useState<diff>("facile");
+  useEffect(() => {
+    const a = window.localStorage.getItem("params");
+
+    a
+      ? window.localStorage.setItem(
+          "params",
+          JSON.stringify({
+            ...JSON.parse(a),
+            difficulty: diff,
+          })
+        )
+      : window.localStorage.setItem(
+          "params",
+          JSON.stringify({
+            sound: true,
+            volume: 0.5,
+            difficulty: diff,
+          })
+        );
+  }, [diff]);
+  const play = () => {};
   return (
     <main>
-      <h1>Page d accueil</h1>
-      <p>ce ci est un texte explicatif</p>
-      <div>
-        <button>Facile</button>
-        <button>Moyen</button>
-        <button>Dificile</button>
-        <button>Perosnalisé</button>
-        
+      <Intro />
+      <div className={`${style.center} ${getClass(diff)}`}>
+        <div className={style.chose}>
+          <Case data="facile" state={diff} setState={setDiff} />
+          <Case data="moyen" state={diff} setState={setDiff} />
+          <Case data="difficile" state={diff} setState={setDiff} />
+        </div>
+        <Details data={getData(diff)} />
+        <div>
+          <Link href={"/game"}>
+            <button onClick={play} className={style.btn}>
+              C'est parti pour jouer, s'enrichir et agir!
+            </button>
+          </Link>
+        </div>
+        <Link href={"/succes"} style={{ marginTop: "20px", color: "black" }}>
+          Voir les succes
+        </Link>
       </div>
-      <Link href={"/game"}>
-      <button>Jouer</button></Link>
+      <P />
     </main>
   );
 }
 
-/**
- * 
- * 
- * 
- * 
- * let camera: any, scene: THREE.Scene, raycaster: any, renderer: any;
-
-
-
-const pointer = new THREE.Vector2();
-
-init();
-animate();
-
-function init() {
-  camera = new THREE.PerspectiveCamera(
-    70,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    100
-  );
-
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xf0f0f0);
-  camera.position.z = 5;
-
- 
-
-  const geometry = new THREE.BoxGeometry();
-
-  const object = new THREE.Mesh(
-    geometry,
-    new THREE.MeshBasicMaterial({color : 0xfffff})
-  );
-
-  object.position.x = 1;
-  object.position.y = 1;
-  object.position.z = 1;
-
-  
-
-  scene.add(object);
-
-  const obj = new THREE.Mesh(
-    geometry,
-    new THREE.MeshBasicMaterial({color : 0xfffff})
-  );
-
-  obj.position.x = 1;
-  obj.position.y = 1;
-  obj.position.z = 2;
-
-  
-
-  scene.add(obj);
-
-
-  raycaster = new THREE.Raycaster();
-
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
-
-  document.addEventListener("mousemove", onPointerMove);
-
-  //
-
-  
-}
-
-
-function onPointerMove(event: MouseEvent) {
-  pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-  pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
-}
-
-//
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  render();
-}
-
-function render() {
-
-
-  // find intersections
-
-  raycaster.setFromCamera(pointer, camera);
-
-  const intersects = raycaster.intersectObjects(scene.children, false);
-  
-  if (intersects.length > 0) {
-	console.log(intersects);
-    
+function getClass(diff: diff) {
+  switch (diff) {
+    case "facile":
+      return style.green;
+    case "moyen":
+      return style.yellow;
+    case "difficile":
+      return style.red;
   }
-
-  renderer.render(scene, camera);
 }
 
- */
+function Details({ data }: { data: data }) {
+  return (
+    <ul className={style.ul}>
+      <li>{data.coup}</li>
+      <li>{data.time}</li>
+      <li>{data.vie}</li>
+      <li>{data.pre}</li>
+    </ul>
+  );
+}
+
+function Case({
+  data,
+  state,
+  setState,
+}: {
+  data: diff;
+  state: diff;
+  setState: Dispatch<SetStateAction<diff>>;
+}) {
+  const handle = () => {
+    setState(data);
+  };
+  return (
+    <div
+      onClick={handle}
+      className={`${style.s} ${state == data ? style.select : style.case} `}
+    >
+      {data}
+    </div>
+  );
+}
+
+function getData(data: diff) {
+  switch (data) {
+    case "facile":
+      return {
+        time: "pas de Limite de temps",
+        vie: "5 vies utilisables !",
+        pre: "Niveaux de précision : Faible",
+        coup: "Nombre de coups de pouce : 30",
+      };
+    case "moyen":
+      return {
+        time: "30min maximum pour finir le puzzle",
+        vie: "2 vies utilisables !",
+        pre: "Niveaux de précision : Moyen",
+        coup: "Nombre de coups de pouce : 15",
+      };
+    case "difficile":
+      return {
+        time: "15min maximum pour finir le puzzle",
+        vie: "Aucune vie disponible !",
+        pre: "Niveaux de précision : Élevé",
+        coup: "Nombre de coups de pouce : 0",
+      };
+  }
+}
+
+function P() {
+  const [val, setVal] = useState(5);
+  const [sound, setSound] = useState(true);
+  const [state, setState] = useState(false);
+
+
+  useEffect(()=>{
+    if(document.getElementsByTagName("canvas").length > 0){
+      if(window.location.href.endsWith("/")) window.location.reload()
+      
+    }
+  },[])
+
+
+  useEffect(() => {
+    const a = window.localStorage.getItem("params");
+    document.addEventListener("keyup", (e)=>{
+  
+      if(e.key == "Escape"){
+      
+        setState(state ? false : true)
+      }
+    })
+    a
+      ? window.localStorage.setItem(
+          "params",
+          JSON.stringify({
+            ...JSON.parse(a),
+            volume: val / 10,
+            sound: sound,
+          })
+        )
+      : window.localStorage.setItem(
+          "params",
+          JSON.stringify({
+            volume: val / 10,
+            sound: sound,
+            difficulty: "facile",
+          })
+        );
+  }, [val, sound]);
+  return (
+    <div className={style.parms}>
+      <button onClick={()=>setState(state ? false : true)}>Paramètre</button>
+      {state && (
+        <div className={style.bg} id="pop" onClick={(e)=>{
+          if(e.currentTarget.id != "pop"){
+            setState(false)
+          }
+        }}>
+          <div className={style.pop} >
+            <div className={style.in}>
+              Son
+              <input
+                type="checkbox"
+                checked={sound}
+                onChange={(e) => setSound(e.target.checked)}
+              />
+            </div>
+            {sound && (
+              <div className={style.in}>
+                <span>Volume</span>
+                <input
+                  type="range"
+                  min="0"
+                  max="10"
+                  value={val}
+                  onChange={(e) => setVal(Number.parseInt(e.target.value))}
+                />
+                <span>{val}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

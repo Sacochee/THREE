@@ -1,0 +1,38 @@
+[
+  {
+    "q": "Quel principe met en place la loi Roudy ?",
+    "t": "Egalité professionnelle entre les femmes et les hommes",
+    "f": [
+      "Egalité politique entre les femmes et les hommes",
+      "Egalité des chances entre les femmes et les hommes"
+    ],
+    "a": "A"
+  },
+  {
+    "q": "En quelle année la loi Roudy a-t-elle été adoptée ?",
+    "t": "1983",
+    "f": ["1996", "2000"],
+    "a": "A"
+  },
+  {
+    "q": "Quel est le principal objectif de la loi Génisson ?",
+    "t": "Renforcer la loi Roudy",
+    "f": [
+      "Supprimer la loi Roudy",
+      "Instaurer un index de l’égalité professionnelle"
+    ],
+    "a": "A"
+  },
+  {
+    "q": "Selon l’INSEE, quelle est la différence de salaire entre les femmes et les hommes en 2021 ?",
+    "t": "24,4 %",
+    "f": ["50 %", "36,6 %"],
+    "a": "A"
+  },
+  {
+    "q": "Quelle loi impose un quota de 40 % de femmes cadres dirigeantes dans les entreprises d’ici 2030 ?",
+    "t": "Loi du 24 décembre 2021",
+    "f": ["Loi du 5 septembre 2018", "Loi du 7 mars 2000"],
+    "a": "A"
+  }
+]

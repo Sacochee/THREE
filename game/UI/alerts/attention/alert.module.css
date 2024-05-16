@@ -1,0 +1,38 @@
+.main{
+    background-color: var(--yellow);
+    width: 300px;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    color: #fff;
+    gap: 40px;
+    padding: 0 20px;
+    border-top-left-radius:20px ;
+    border-bottom-left-radius:20px ;
+    animation: spawn 1s ease-in-out ;
+
+}
+.txt{
+    padding-right: 40px;
+    max-width: 270px;
+}
+.c{
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+}
+
+
+
+
+@keyframes spawn {
+    0%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}

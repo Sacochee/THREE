@@ -1,12 +1,14 @@
-import { Object3D, Scene } from "three";
+import { Object3D, Scene, Vector3 } from "three";
 import { MeshPiece } from "./MeshPiece";
 import { drag } from "../fnc/InitPièces";
-import { orb } from "../main";
-
+import { camera } from "../main";
+import { setPossitionCamera } from "../camera/camera";
 
 export default class SceneManager {
   private scene: Scene;
   private cache: any[] = [];
+  private vector = { x: 0, y: 0, z: 0 };
+  private side = false
 
   constructor(_scene: Scene) {
     this.scene = _scene;
@@ -16,27 +18,32 @@ export default class SceneManager {
     return this.scene;
   }
 
-  gethaveCache(){
-    console.log(this.cache.length)
-    console.log(this.cache.length != 0)
-    return this.cache.length != 0
+  saveCam() {
+    this.vector.x = camera.position.x;
+    this.vector.y = camera.position.y;
+    this.vector.z = -camera.position.z;
   }
 
-  buildNewScene(lst: MeshPiece[], cache : Object3D[]) {
-    drag.enabled = false
-    this.cache = cache
-    cache.forEach(item =>{
-        this.scene.remove(item)
-    })
+  gethaveCache() {
+    return this.side
+  }
 
+  buildNewScene( cache: Object3D[]) {
+    drag.enabled = false;
+    this.cache = cache;
+    cache.forEach((item) => {
+      this.scene.remove(item);
+    });
+    this.side = true
   }
 
   mainScene() {
-    drag.enabled = true
-   this.cache.forEach(item =>{
-    this.scene.add(item)
-   })
-   this.cache = []
-   
+    drag.enabled = true;
+    this.cache.forEach((item) => {
+      this.scene.add(item);
+    });
+    this.cache = [];
+    this.side = false
+    setPossitionCamera(this.vector.x, this.vector.y, this.vector.z);
   }
 }

@@ -1,11 +1,14 @@
 import { MeshPiece } from "../class/MeshPiece";
 import { Scene } from "three";
-import { targetPiece } from "../main";
+import { adv, parms, targetPiece } from "../main";
 import Grp from "./verifyGroupe";
+import playSound from "./PlaySound";
+import GameWin from "./GameWin";
 
-const v = 1;
+
 
 export function verifieHit(scene: Scene) {
+  
   (targetPiece.getTarget() as MeshPiece).changeTargeted(
     true,
     crypto.randomUUID()
@@ -25,6 +28,8 @@ export function verifieHit(scene: Scene) {
 
   if(targets.length == 0 ) return
 
+  let place = false;
+
   for (let i = 0; i < lst.length; i++) {
     if (isClose(lst[i], targets[0])) {
       if (getTargets(targets).includes(lst[i].getIndex())) {
@@ -33,29 +38,28 @@ export function verifieHit(scene: Scene) {
             lst[i].push(target);
             target.push(lst[i]);
             target.move(lst[i].position, crypto.randomUUID());
+            place = true
           }
         }
       }
     }
   }
 
+  place && playSound()
+  place && Grp(scene);
+
   targets[0].changeTargeted(false, crypto.randomUUID());
   targetPiece.setTarget();
 
-  lst.forEach((item) => {
-    targets.push(item);
-    lst.splice(lst.indexOf(item), 1);
-  });
-
-  Grp(scene, targets, lst);
+  GameWin()
 }
 
 function isClose(obj: MeshPiece, target: MeshPiece) {
   return (
-    obj.position.x - v < target.position.x &&
-    obj.position.x + v > target.position.x &&
-    obj.position.y - v < target.position.y &&
-    obj.position.y + v > target.position.y
+    obj.position.x - adv.getRange() < target.position.x &&
+    obj.position.x + adv.getRange() > target.position.x &&
+    obj.position.y - adv.getRange() < target.position.y &&
+    obj.position.y + adv.getRange() > target.position.y
   );
 }
 
@@ -70,3 +74,6 @@ export function getTargets(targets: MeshPiece[]): number[] {
 
   return lst;
 }
+
+
+

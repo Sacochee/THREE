@@ -1,3 +1,109 @@
-div{
-    position: absolute;;
+.s {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 100px;
+  border-radius: 15px;
+  cursor: pointer;
+
+}
+
+.parms button{
+  border: none;
+  padding: 10px 30px;
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  cursor: pointer;
+}
+
+.parms button:hover{
+  background-color: white;
+  color: var(--blue);
+}
+
+.pop{
+  position: fixed;
+  top: 0;
+  background-color: #fff ;
+  right: 130px;
+  width: 225px;
+}
+.select {
+  background: var(--bg);
+  color: #fff;
+}
+.case {
+  background: #fff;
+}
+
+.chose {
+  display: flex;
+  
+  align-items: center;
+  justify-content: space-between;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.green{
+  --bg : var(--green);
+  --c : #fff;
+}
+
+.red{
+  --bg : var(--red);
+  --c : #fff;
+}
+
+.yellow{
+  --bg : var(--yellow);
+  --c : #fff;
+}
+
+.btn{
+  padding: 10px 30px;
+  border-radius: 15px;
+  cursor: pointer;
+  background:linear-gradient(90deg, var(--blue)0%, white 33%,white 66%, var(--red));
+  color: black;
+  border: 1px solid white ;
+  font-size: large;
+}
+
+.btn:active{
+  background-color: var(--c);
+  color: var(--bg);
+}
+
+.ul{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 300px;
+  color: var(--bg);
+}
+
+.in{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+@media (hover : hover) {
+  .btn:hover{
+    background: none;
+    background-color: var(--c);
+    color: var(--bg);
+    border-color: var(--bg);
+    border-style:solid;
+  }
 }

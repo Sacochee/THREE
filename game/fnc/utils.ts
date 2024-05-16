@@ -5,22 +5,22 @@ import { setPossitionCamera } from "../camera/camera";
 const A = {
     x : -5,
     y : -3 ,
-    z : 5
+    z : 5.4 * window.innerHeight / 738
 }
 const B = {
     x : -5,
     y : 3 ,
-    z : 0
+    z : 4.1 * window.innerHeight / 738
 }
 const C = {
     x : 5,
     y : -3 ,
-    z : 0
+    z : 4.1 * window.innerHeight / 738
 }
 const D = {
     x : 5,
     y : 3 ,
-    z : 0
+    z : 5.4 * window.innerHeight / 738
 }
 
 

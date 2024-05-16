@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/Addons.js";
-import { camera, orb, renderer, scene, sceneManager } from "../main";
+import { adv, camera, orb, renderer, scene, sceneManager } from "../main";
 import { MeshPiece } from "../class/MeshPiece";
 import { abcd } from "../types";
 import { centerCamera } from "../fnc/utils";
@@ -39,37 +39,36 @@ export default function () {
 }
 
 export function reverseCam(lst?: MeshPiece[], cCamera?: abcd) {
-  if (sceneManager.gethaveCache() == true) {sceneManager.mainScene();}
-  else {
+  
+  if (sceneManager.gethaveCache() == true) {
     
+    sceneManager.mainScene();
+    adv.setUseR(true)
+    adv.setUseS(true)
+  } else {
+    sceneManager.saveCam()
     const liste: MeshPiece[] = lst ? lst : [];
     const cache: THREE.Object3D[] = [];
     if (lst) {
       scene.children.forEach((item) => {
-        if (item instanceof THREE.Light) return;
         if (item instanceof MeshPiece)
           if (!lst.includes(item)) cache.push(item);
       });
-      if(cCamera)
-      centerCamera(camera, cCamera, lst[0].position)
+      if (cCamera) centerCamera(camera, cCamera, lst[0].position);
     } else {
       scene.children.forEach((item) => {
-        if (item instanceof THREE.Light) return;
-        if (item instanceof MeshPiece )
-          liste.push(item);
+        if (item instanceof MeshPiece||item instanceof THREE.AmbientLight){}
         else cache.push(item);
       });
     }
-
-    sceneManager.buildNewScene(liste, cache);
-    
+    sceneManager.buildNewScene(cache);
+    adv.setUseR(false)
   }
   camera.position.setZ(-camera.position.z);
 }
 
-
-export function setPossitionCamera(x: number, y : number, z: number){
-  camera.position.set(x, y, z)
-  orb.target.x = x
-  orb.target.y = y
+export function setPossitionCamera(x: number, y: number, z: number) {
+  camera.position.set(x, y, z);
+  orb.target.x = x;
+  orb.target.y = y;
 }

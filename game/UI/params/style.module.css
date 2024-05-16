@@ -1,0 +1,7 @@
+.main{}
+
+.main section{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
