@@ -11,52 +11,58 @@ export default function Page() {
       .then((response) => response.text())
       .then((data) => {
         setHtmlContent(data);
-        const ids = [
-          "Persistante",
-          "Escargot",
-          "Dans les clous",
-          "Efficace",
-          "Juste a temps",
-          "La fin etait proche...",
-          "à la dernière !",
-          "Exacte !",
-          "Intermédiaire",
-          "Désorganisée",
-          "Organisée",
-          "Flemarde",
-          "Talentueuse",
-          "Débutante",
-          "Expérimentée",
-          "Une routine",
-        ];
-    
-        if (window.localStorage.getItem("sucess")) {
-          const lst = JSON.parse(window.localStorage.getItem("sucess") as string);
-    
-          for (let i = 0; i < lst.length; i++) {
-            ids.splice(ids.indexOf(lst[i]), 1);
-            Ob(document.getElementById(lst[i]) as HTMLElement);
-          }
-        }
-    
-        ids.forEach((item) => Nc(document.getElementById(item) as HTMLElement));
-    
-        function Ob(div : HTMLElement) {
-          div.classList.add("ok");
-          div.children[2].textContent = "Obtenu";
-        }
-    
-        function Nc(div : HTMLElement) {
-          div.classList.add("no");
-          div.children[2].textContent = "A valider";
-        }
+        
       })
       .catch((error) => {
-        
+        console.log(error as any)
       });
       
     
   }, []);
+
+  useEffect(()=>{
+    const ids = [
+      "Persistante",
+      "Escargot",
+      "Dans les clous",
+      "Efficace",
+      "Juste a temps",
+      "La fin etait proche...",
+      "à la dernière !",
+      "Exacte !",
+      "Intermédiaire",
+      "Désorganisée",
+      "Organisée",
+      "Flemarde",
+      "Talentueuse",
+      "Débutante",
+      "Expérimentée",
+      "Une routine",
+    ];
+
+    if (window.localStorage.getItem("sucess")) {
+      const lst = JSON.parse(window.localStorage.getItem("sucess") as string);
+
+      for (let i = 0; i < lst.length; i++) {
+        ids.splice(ids.indexOf(lst[i]), 1);
+        Ob(document.getElementById(lst[i]) as HTMLElement);
+      }
+    }
+
+    ids.forEach((item) => Nc(document.getElementById(item) as HTMLElement));
+
+    function Ob(div : HTMLElement) {
+      if(div == null) return
+      div.classList.add("ok");
+      div.children[2].textContent = "Obtenu";
+    }
+
+    function Nc(div : HTMLElement) {
+      if(div == null) return
+      div.classList.add("no");
+      div.children[2].textContent = "A valider";
+    }
+  }, [htmlContent])
   return (
     <main className={style.page}>
       <h1>Succes</h1>
