@@ -1,11 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
-import file from "fs"
 
 export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<String>
 ) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   fs.readFile("./succes.html", "utf8", (err, data) => {
     if (err) {
       console.error("Erreur de lecture du fichier:", err);

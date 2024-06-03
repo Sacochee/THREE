@@ -7,7 +7,7 @@ export default function Page() {
   const [htmlContent, setHtmlContent] = useState("<div>Loading ...</div>");
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/main")
+    fetch(origin+"/api/main")
       .then((response) => response.text())
       .then((data) => {
         setHtmlContent(data);

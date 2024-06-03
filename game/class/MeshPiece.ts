@@ -1,12 +1,13 @@
 import * as THREE from "three";
+import { v4 as uuidv4 } from 'uuid';
 
 export class MeshPiece extends THREE.Group {
   private index;
   private readonly nextTo: number[];
   private grp: MeshPiece[] = [];
-  private lastMvt: string = crypto.randomUUID();
+  private lastMvt: string = uuidv4()
   private targeted: boolean = false;
-  private targetUpdate: string = crypto.randomUUID();
+  private targetUpdate: string = uuidv4()
 
   constructor(lst: number[], id: number) {
     super();

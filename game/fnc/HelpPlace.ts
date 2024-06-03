@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { MeshPiece } from "../class/MeshPiece";
 import TargetPiece from "../class/TargetPiece";
 import { verifieHit } from "./fonctions";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function (scene: THREE.Scene, targetSetter : TargetPiece) {
   const lst : MeshPiece[][] =  []
@@ -31,7 +32,7 @@ export default function (scene: THREE.Scene, targetSetter : TargetPiece) {
   lst.splice(lst.indexOf(bigLst), 1)
   if(lst.length > 0){
     const target = getMeshLst(getIndex(bigLst), lst)
-    target[0].move(new THREE.Vector3(bigLst[0].position.x, bigLst[0].position.y, 0), crypto.randomUUID())
+    target[0].move(new THREE.Vector3(bigLst[0].position.x, bigLst[0].position.y, 0), uuidv4())
     for(const t of target){
       targetSetter.setTarget(t)
         verifieHit(scene)

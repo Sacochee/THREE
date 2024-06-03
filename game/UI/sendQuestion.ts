@@ -59,7 +59,7 @@ export function Err(a: abcd) {
     adv.rmHeart();
     score(true);
     document.getElementById("question")?.remove();
-    Attention("vous vennez de perdre une vie !");
+    Attention("vous venez de perdre une vie !");
   }
 }
 

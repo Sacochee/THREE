@@ -4,6 +4,7 @@ import { adv, parms, targetPiece } from "../main";
 import Grp from "./verifyGroupe";
 import playSound from "./PlaySound";
 import GameWin from "./GameWin";
+import { v4 as uuidv4 } from 'uuid';
 
 
 
@@ -11,7 +12,7 @@ export function verifieHit(scene: Scene) {
   
   (targetPiece.getTarget() as MeshPiece).changeTargeted(
     true,
-    crypto.randomUUID()
+   uuidv4()
   );
   const targets: MeshPiece[] = [];
   const lst: MeshPiece[] = [];
@@ -37,7 +38,7 @@ export function verifieHit(scene: Scene) {
           if (!target.getGrp().includes(lst[i])) {
             lst[i].push(target);
             target.push(lst[i]);
-            target.move(lst[i].position, crypto.randomUUID());
+            target.move(lst[i].position, uuidv4());
             place = true
           }
         }
@@ -48,7 +49,7 @@ export function verifieHit(scene: Scene) {
   place && playSound()
   place && Grp(scene);
 
-  targets[0].changeTargeted(false, crypto.randomUUID());
+  targets[0].changeTargeted(false, uuidv4());
   targetPiece.setTarget();
 
   GameWin()

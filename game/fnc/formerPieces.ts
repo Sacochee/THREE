@@ -12,7 +12,7 @@ export default function Bluid() {
   const liste: MeshPiece[] = [];
   const loader = new GLTFLoader();
   loader.load(
-    "D.glb",
+    "F.glb",
     (data: GLTF) => {
       data.scene.children.forEach((item) => {
         if (item.children.length > 0) {

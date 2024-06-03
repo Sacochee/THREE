@@ -4,6 +4,7 @@ import { MouseManager, camera, orb, renderer, targetPiece } from "../main";
 import { DragControls } from "three/examples/jsm/Addons.js";
 import Part from "../class/Part";
 import { Vector3 } from "three";
+import { v4 as uuidv4 } from 'uuid';
 
 export let drag : DragControls
 
@@ -76,7 +77,7 @@ export function setDrag(liste: MeshPiece[]) {
   drag.addEventListener("drag", (e) => {
     if(!(e.object instanceof MeshPiece))return
      const v = new Vector3(e.object.position.x, e.object.position.y, 0)
-    e.object.move(v, crypto.randomUUID())
+    e.object.move(v, uuidv4())
     
   });
 }

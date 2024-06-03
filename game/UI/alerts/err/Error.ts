@@ -1,11 +1,12 @@
 import { parms } from "@/game/main";
 import style from "./err.module.css";
+import { v4 as uuidv4 } from 'uuid';
 
 export default function (txt: string) {
   const audio = new Audio("/sounds/err.mp3");
   audio.volume = parms.volume;
   parms.sound && audio.play();
-  const uuid = crypto.randomUUID();
+  const uuid = uuidv4()
   const root = document.getElementById("box");
 
   if (document.getElementsByClassName("err").length > 0) {

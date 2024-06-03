@@ -10,7 +10,7 @@ export default function () {
   h1.textContent = "Succes"
   doc.appendChild(h1)
   doc.appendChild(d)
-  fetch("http://localhost:3000/api/main")
+  fetch(origin+"/api/main")
   .then((response) => {
     if (!response.ok) {
       throw new Error("Error fetch data Sucess !");
