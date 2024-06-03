@@ -70,7 +70,6 @@ export class MeshPiece extends THREE.Group {
 
   rmGrp(id : MeshPiece){
     if(this.grp.indexOf(id) != -1){
-      console.log("do")
       this.grp.splice(this.grp.indexOf(id), 1)
     }
   }

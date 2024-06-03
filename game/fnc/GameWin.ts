@@ -33,7 +33,7 @@ export default function () {
         return;
       }
     }
-    lst[0].move(new Vector3(), crypto.randomUUID());
+    lst.forEach(item => item.position.set(0,0,0))
     win();
   }
 }

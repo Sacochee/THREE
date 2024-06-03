@@ -1,0 +1,32 @@
+[
+  {
+    "q": "Comment s’appelle le texte écrit par Olympe de Gouges ?",
+    "t": "La Déclaration des Droits de la Femme et de la Citoyenne",
+    "f": ["J’accuse", "Le Deuxième sexe"],
+    "a": "B"
+  },
+  {
+    "q": "A quelle date les femmes obtiennent-elles le droit de vote en France ?",
+    "t": "21 avril 1944",
+    "f": ["29 avril 1945", "6 février 1918"],
+    "a": "B"
+  },
+  {
+    "q": "A quelle date les femmes votent-elles pour la première fois en France ?",
+    "t": "29 avril 1945",
+    "f": ["7 mai 1945", "21 avril 1944"],
+    "a": "B"
+  },
+  {
+    "q": "A quelle date est votée le principe de la parité politique ?",
+    "t": "8 juillet 1999",
+    "f": ["29 avril 1945", "4 octobre 1958"],
+    "a": "B"
+  },
+  {
+    "q": "Que garantit la loi du 6 juin 2000 ?",
+    "t": "Un égal accès des femmes et des hommes aux mandats électoraux et fonctions électives",
+    "f": ["L’égalité professionnelle entre les femmes et les hommes", "Le droit à l’interruption volontaire de grossesse (IVG)"],
+    "a": "B"
+  }
+]

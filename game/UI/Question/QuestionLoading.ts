@@ -11,7 +11,6 @@ export type dataQuestion = {
 };
 
 export default function (data: dataQuestion) {
-  console.log(data)
   const div = document.createElement("div");
   div.className = style.main
 

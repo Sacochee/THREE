@@ -12,9 +12,8 @@ export default function Bluid() {
   const liste: MeshPiece[] = [];
   const loader = new GLTFLoader();
   loader.load(
-    "C.glb",
+    "D.glb",
     (data: GLTF) => {
-      
       data.scene.children.forEach((item) => {
         if (item.children.length > 0) {
           let obj = null;
@@ -24,11 +23,7 @@ export default function Bluid() {
               break;
             }
           }
-
           if (obj == null) return;
-        
-          
-
           const mesh = new MeshPiece(obj.cote, obj.id);
           const lst: THREE.Mesh[] = [];
           item.children.forEach((i) => {
@@ -38,13 +33,8 @@ export default function Bluid() {
               mesh.add(build);
             }
           });
-
           const box = new THREE.Box3().setFromObject(mesh);
-          // console.log(box.getSize(new THREE.Vector3()));
-
-      
           mesh.rotateX(Math.PI / 2);
-      
           place(mesh)
           scene.add(mesh);
           liste.push(mesh);

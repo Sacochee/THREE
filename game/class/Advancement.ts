@@ -24,7 +24,7 @@ export default class Advancement {
 
   constructor(lvl : "facile" | "moyen" | "difficile") {
     this.heart = lvl == "facile" ? 5 : lvl == "moyen" ? 2 : 0
-    this.helpMove = lvl == "facile" ? 30 : lvl == "moyen" ? 15 : 0
+    this.helpMove = lvl == "facile" ? 300 : lvl == "moyen" ? 15 : 0
     this.limiteTime = lvl == "facile" ? Infinity : lvl == "moyen" ? 30*60 : 15*60
     this.range = lvl == "facile" ? 1 : lvl == "moyen" ? 0.5 : 0.1
     this.lvl = lvl

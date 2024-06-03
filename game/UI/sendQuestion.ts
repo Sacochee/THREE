@@ -11,8 +11,8 @@ import GameWin from "../fnc/GameWin";
 import QuestionLoading, { dataQuestion } from "./Question/QuestionLoading";
 import boulo from "../data/egaliteBolo.json";
 import egale from "../data/egaliteFemme.json";
-import data from "../data/A.json";
-
+import B from "../data/B.json"
+import C from "../data/C.json"
 
 
 export default function AddQuestion(type: abcd) {
@@ -37,9 +37,9 @@ function getQuestion(a: abcd) {
     case "A":
       return QuestionLoading(getRandomMenber(boulo));
     case "B":
-      return QuestionLoading(data[0] as dataQuestion);
+      return QuestionLoading(getRandomMenber(B));
     case "C":
-      return QuestionLoading(data[1] as dataQuestion);
+      return QuestionLoading(getRandomMenber(C));
     case "D":
       return QuestionLoading(getRandomMenber(egale));
   }
@@ -59,7 +59,7 @@ export function Err(a: abcd) {
     adv.rmHeart();
     score(true);
     document.getElementById("question")?.remove();
-    Attention("Je vennez de perdre une vie !");
+    Attention("vous vennez de perdre une vie !");
   }
 }
 

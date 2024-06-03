@@ -51,7 +51,7 @@ export default function () {
     ids.forEach((item) => Nc(document.getElementById(item) as HTMLElement));
 
     function Ob(div : HTMLElement) {
-      console.log("here");
+
       div.classList.add("ok");
       div.children[2].textContent = "Obtenu";
     }

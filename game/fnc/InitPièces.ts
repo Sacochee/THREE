@@ -64,7 +64,6 @@ export function setDrag(liste: MeshPiece[]) {
   //   }
   // })
   drag.addEventListener("dragstart", (e) => {
-    console.log((e.object as  MeshPiece).getIndex())
     targetPiece.setDragging(true)
     orb.enabled = false;
   });

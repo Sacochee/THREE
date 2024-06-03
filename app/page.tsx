@@ -3,7 +3,7 @@ import Link from "next/link";
 import style from "./page.module.css";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Volume } from "three/examples/jsm/Addons.js";
-import Intro from "@/componets/main/intro";
+import Intro from "@/comps/main/intro";
 import { div } from "three/examples/jsm/nodes/Nodes.js";
 import { useSearchParams } from "next/navigation";
 type diff = "facile" | "moyen" | "difficile";
@@ -54,7 +54,7 @@ export default function Home() {
             </button>
           </Link>
         </div>
-        <Link href={"/succes"} style={{ marginTop: "20px", color: "black" }}>
+        <Link href={"/succes"} style={{ marginTop: "20px", color: "black",  marginBottom : "50px"}}>
           Voir les succes
         </Link>
       </div>
@@ -114,7 +114,7 @@ function getData(data: diff) {
         time: "pas de Limite de temps",
         vie: "5 vies utilisables !",
         pre: "Niveaux de précision : Faible",
-        coup: "Nombre de coups de pouce : 30",
+        coup: "Nombre de coups de pouce : 300",
       };
     case "moyen":
       return {

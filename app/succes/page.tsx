@@ -62,7 +62,7 @@ export default function Page() {
       <h1>Succes</h1>
       <div dangerouslySetInnerHTML={{ __html: htmlContent }} className={style.main}/>
       <Link href={"/"}>
-      <button>Back to hub</button>
+      <button>Retour à la page d'accueil</button>
       </Link>
     </main>
   );

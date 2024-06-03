@@ -32,9 +32,7 @@ export function use() {
 export function heartTst() {
   // ok
   const init = adv.getLvl() == "facile" ? 5 : adv.getLvl() == "moyen" ? 2 : 0;
-  console.log(init)
   const heart = adv.getHeart();
-  console.log(heart)
   if (heart == init) addToLocalStorage("Exacte !");
   else if (heart + 2 == init) addToLocalStorage("Intermédiaire");
   else if (heart + 5 == init) addToLocalStorage("Désorganisée");
